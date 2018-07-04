@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
-	<form method="POST">
+{% block body %}
+	<div class="jumbotron text-center">
+		<br>
+		<h1>Pomodoro-Tracker V1.0</h1>
+		<br>
+		<p class="lead">Set your own custom pomodoro-timers, schedule breaks, organise todo-tasks and more.</p>
+		<hr>
+		<br>
+		{% if session.logged_in == NULL %}
+			<a href="/register" class="btn btn-primary btn-lg">Register</a>
+			<a href="/login" class="btn btn-success btn-lg">Login</a>
+		{% endif %}
+	</div>
+
+{% endblock %}
+<!-- 	<form method="POST">
 		{{ form.hidden_tag() }}
 		{{ form.username() }}
 		{{ form.password() }}
 		<button type="submit" value="Login" name="login"> Login </button>
-	</form>
-
-</body>
-</html>
+	</form> -->
