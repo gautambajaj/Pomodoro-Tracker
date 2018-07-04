@@ -18,7 +18,7 @@ def index():
 @app.route('/login')
 def login():
 	form = LoginForm()
-	return render_template('home.html',form=form)
+	return render_template('login.html',form=form)
 
 
 # user registration page
@@ -29,7 +29,7 @@ def register():
 # pomodoro-tracker page
 @app.route('/pomodoro')
 def pomodoro():
-	pass
+	return render_template('pomodoro.html')
 
 # feedback page
 @app.route('/feedback')
