@@ -1,0 +1,21 @@
+#chronoExample{
+	text-align: center;
+	font-size: 100px;
+	color: white;
+	background-color: darkred;
+	margin-bottom: 0px;
+}
+
+.timerButtons{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#exampleModal{
+	font-size: 20px;
+	color: black;
+}
+
+.todoTable{
+	font-size: 16px;
+}
