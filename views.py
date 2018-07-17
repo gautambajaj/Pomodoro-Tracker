@@ -67,10 +67,15 @@ def logout():
 @login_required
 def pomodoro():
 	if request.method == 'POST':
-		pass
-	
-	todos = Todos.query.filter_by(member_username=current_user.username).all()
-	return render_template('pomodoro.html',todos=todos)
+		timerTarget = request.form['pomodoroInterval']
+		breakTarget = request.form['breakInterval']
+		# convert times to minutes:
+		timerTarget = timerTarget[3:]
+		breakTarget = breakTarget[3:]
+
+		return render_template('pomodoro.html', timerTarget=timerTarget, breakTarget=breakTarget)
+	else:
+		return render_template('pomodoro.html', timerTarget=1, breakTarget=1)
 
 
 # todos scheduler

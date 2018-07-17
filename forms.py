@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, PasswordField, StringField, BooleanField
+from wtforms import TextField, PasswordField, StringField, BooleanField, IntegerField
 from wtforms.validators import InputRequired, Email, Length
 
 class LoginForm(FlaskForm):
@@ -12,8 +12,3 @@ class RegisterForm(FlaskForm):
 	email = StringField('email', validators=[InputRequired(), Email(message='Invalid Email'), Length(max=50)])
 	username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
 	password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-
-
-# class TimerSettingsForm(FlaskForm):
-# 	pomodoro_interval = 
-# 	break_interval = 

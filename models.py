@@ -15,3 +15,10 @@ class Todos(db.Model):
 	description = db.Column(db.String(200), nullable=False)
 	completed = db.Column(db.Boolean(), default=False)
 	create_date = db.Column(db.TIMESTAMP())
+
+
+class TimerDetails(db.Model):
+	id = db.Column(db.Integer(), primary_key=True, unique=True, autoincrement=True)
+	member_username = db.Column(db.String(50))
+	pomodoro_interval = db.Column(db.Integer())
+	break_interval = db.Column(db.Integer())
