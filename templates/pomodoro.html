@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 {% block head %}
 	<script src="/static/lib/easytimer/dist/easytimer.min.js"></script>
-	<script type="text/javascript" src="/static/pomodoro.js"></script>
+	<script id="pomodoro" type="text/javascript" src="/static/pomodoro.js" timerTarget="0.5" breakTarget="0.5">
+	</script>
 	<link rel="stylesheet" type="text/css" href="/static/pomodoro.css">
 {% endblock %}
 
