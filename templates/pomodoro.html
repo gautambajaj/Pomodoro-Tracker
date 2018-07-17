@@ -8,11 +8,11 @@
 {% block body %}
 	<br><br><br><br>
 	<div id="chronoExample">
-		00:00:00	
-		<div class="timerButtons">
+    	<div class="values">00:00:00</div>
+		<div>
 			<button class="btn btn-lg btn-success startButton">Start</button>
 	        <button class="btn btn-lg btn-danger pauseButton" >Pause</button>
-	        <button class="btn btn-lg btn-warning stopButton">Reset</button>
+	        <button class="btn btn-lg btn-warning resetButton">Reset</button>
 	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
 		Settings
 	</button>
@@ -57,5 +57,25 @@
 		<tr>
 			<td><h3><b>To-Do List</b></h3></td>
 		</tr>
+
+		</tr>
+		{% for todo in todos %}
+			<tr>
+				<td>{{todo.id}}</td>
+				<td>{{todo.category}}</td>
+				<td>{{article.description}}</td>
+				<td>{{todo.completed}}</td>
+				<td>{{todo.create_date}}</td>
+				<!-- <td><a href="edit_article/{{article.id}}" class="btn btn-success pull-right">Edit</a></td>
+				<td>
+					<form action="{{url_for('delete_article', id=article.id)}}" method="POST">
+						<input type="hidden" name="method" value="DELETE">
+						<input type="submit" value="Delete" class="btn btn-danger">  
+					</form>
+				</td> -->
+				<td></td>
+			</tr>
+		{% endfor %}
+
 	</table>
 {% endblock %}

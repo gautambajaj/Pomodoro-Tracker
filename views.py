@@ -1,10 +1,11 @@
 from app import app, db
-from models import Member
+from models import Member, Todos
 from forms import LoginForm, RegisterForm
 from flask import render_template, flash, redirect, url_for, session, logging, request
 from flask_bootstrap import Bootstrap
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+import logging
 
 bootstrap = Bootstrap(app)
 # initialize login manager
@@ -65,7 +66,20 @@ def logout():
 @app.route('/pomodoro', methods=["GET", "POST"])
 @login_required
 def pomodoro():
-	return render_template('pomodoro.html')
+	if request.method == 'POST':
+		pass
+	
+	todos = Todos.query.filter_by(member_username=current_user.username).all()
+	return render_template('pomodoro.html',todos=todos)
+
+
+# todos scheduler
+@app.route('/todos', methods=["GET", "POST"])
+@login_required
+def todos():
+	todos = Todos.query.filter_by(member_username=current_user.username).all()
+	return render_template('todos.html',todos=todos)
+
 
 # feedback page
 @app.route('/feedback')
