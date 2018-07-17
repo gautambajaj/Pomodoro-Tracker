@@ -35,12 +35,12 @@
 						<div class="form-group">
 					    	<label for="pomodoroInterval" class="col-form-label">Pomodoro Interval:</label>
 							<input name="pomodoroInterval" type="time" step='60' id="pomodoroInterval" 
-								   min="00:25" max="00:50" value="00:25">
+								   min="00:25" max="00:50" value={{inputTimerTarget}}>
 						</div>
 						<div class="form-group">
 					    	<label for="breakInterval" class="col-form-label">Break Interval:</label>
 							<input name="breakInterval" type="time" step='60' id="breakInterval" min="00:05" 
-								   max="00:25" value="00:05">
+								   max="00:25" value={{inputBreakTarget}}>
 						</div>
 					</div>
 					<div class="modal-footer">

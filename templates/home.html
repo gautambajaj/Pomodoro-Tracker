@@ -8,11 +8,11 @@
 		<p class="lead">Set your own custom pomodoro-timers, schedule breaks, organise todo-tasks and more.</p>
 		<hr>
 		<br>
-		{% if session.logged_in == NULL %}
+		{% if session.logged_in %}
+			<a href="/pomodoro" class="btn btn-primary btn-lg">Return to App</a>
+		{% else %}
 			<a href="/register" class="btn btn-primary btn-lg">Register</a>
 			<a href="/login" class="btn btn-success btn-lg">Login</a>
-		{% else %}
-			<a href="/pomodoro" class="btn btn-primary btn-lg">Return to App</a>
 		{% endif %}
 	</div>
 
