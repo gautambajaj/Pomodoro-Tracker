@@ -1,5 +1,6 @@
 from app import db
 from flask_login import UserMixin
+from datetime import datetime
 
 class Member(UserMixin, db.Model):
 	id = db.Column(db.Integer(), primary_key=True, autoincrement=True, unique=True)
@@ -14,7 +15,7 @@ class Todos(db.Model):
 	category = db.Column(db.String(50), nullable=True)
 	description = db.Column(db.String(200), nullable=False)
 	completed = db.Column(db.Boolean(), default=False)
-	create_date = db.Column(db.TIMESTAMP())
+	create_date = db.Column(db.DateTime(), default=datetime.now())
 
 
 class TimerDetails(db.Model):

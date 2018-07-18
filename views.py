@@ -30,7 +30,8 @@ def getTodos():
 			todo.completed = 'Done'
 		else:
 			todo.completed = 'Pending'
-
+		todo.create_date = str(todo.create_date)
+		todo.create_date = todo.create_date[0:10] 
 	return todos
 
 
@@ -150,10 +151,10 @@ def edit_todo(id):
 	if request.method == 'POST':
 		editTodo.category = request.form['category']
 		editTodo.description = request.form['description']
-		if request.form['status'] == 'pending':
-			editTodo.completed = False
-		else:
+		if request.form['status'] == 'Done':
 			editTodo.completed = True
+		else:
+			editTodo.completed = False
 		db.session.commit()
 
 		todos = getTodos()
