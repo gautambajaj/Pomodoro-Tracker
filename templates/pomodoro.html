@@ -66,17 +66,15 @@
 
 	<table class="table table-striped todoTable">
 		<tr>
-			<th>ID</th>
 			<th>Category</th>
 			<th>Description</th>
-			<th>Completed</th>
+			<th>Status</th>
 			<th>Date Created</th>
 			<th></th>
 		</tr>
 
 		{% for todo in todos %}
 			<tr>
-				<td>{{todo.id}}</td>
 				<td>{{todo.category}}</td>
 				<td>{{todo.description}}</td>
 				<td>{{todo.completed}}</td>
