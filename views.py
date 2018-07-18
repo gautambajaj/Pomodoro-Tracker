@@ -21,6 +21,7 @@ def index():
 	return render_template('home.html')
 
 
+# Login page
 @app.route('/login', methods=["GET", "POST"])
 def login():
 	form = LoginForm()
@@ -66,9 +67,11 @@ def logout():
 @app.route('/pomodoro', methods=["GET", "POST"])
 @login_required
 def pomodoro():
+	todos = Todos.query.filter_by(member_username=current_user.username).all()
 	if request.method == 'POST':
 		inputTimerTarget = request.form['pomodoroInterval']
 		inputBreakTarget = request.form['breakInterval']
+
 		# convert times to minutes:
 		timerTarget = inputTimerTarget[3:]
 		breakTarget = inputBreakTarget[3:]
@@ -79,7 +82,7 @@ def pomodoro():
 		db.session.add(newTimerDetails)
 		db.session.commit()
 
-		return render_template('pomodoro.html', timerTarget=timerTarget, breakTarget=breakTarget, 
+		return render_template('pomodoro.html', todos=todos, timerTarget=timerTarget, breakTarget=breakTarget, 
 												inputTimerTarget=inputTimerTarget, 
 												inputBreakTarget=inputBreakTarget)
 	else:
@@ -87,21 +90,56 @@ def pomodoro():
 		if(timerDetails):
 			inputTimerTarget = ('00:' + str(timerDetails.pomodoro_interval))
 			inputBreakTarget = ('00:' + str(timerDetails.break_interval))
-			return render_template('pomodoro.html', timerTarget=timerDetails.pomodoro_interval, 
+			return render_template('pomodoro.html', todos=todos, timerTarget=timerDetails.pomodoro_interval, 
 													breakTarget=timerDetails.break_interval,
 													inputTimerTarget=inputTimerTarget,
 													inputBreakTarget=inputBreakTarget)
 		else:
-			return render_template('pomodoro.html', timerTarget=25, breakTarget=5, 
+			return render_template('pomodoro.html', todos=todos, timerTarget=25, breakTarget=5, 
 													inputTimerTarget=25, inputBreakTarget=5)
 
 
-# todos scheduler
+# todos manager
 @app.route('/todos', methods=["GET", "POST"])
 @login_required
 def todos():
 	todos = Todos.query.filter_by(member_username=current_user.username).all()
 	return render_template('todos.html',todos=todos)
+
+
+# add new todos
+@app.route('/add_todo', methods=["GET", "POST"])
+@login_required
+def add_todo():
+	if request.method == 'POST':
+		category = request.form['category']
+		description = request.form['description']
+
+		if(category and description):
+			newTodo = Todos(member_username=current_user.username, category=category, 
+							description=description, completed=False)
+			db.session.add(newTodo)
+			db.session.commit()
+			todos = Todos.query.filter_by(member_username=current_user.username).all()
+			return redirect(url_for('todos', todos=todos))
+		else:
+			flash('Please enter complete details', 'danger')
+	else: 
+		return render_template('add_todo.html')
+
+
+# edit todos
+@app.route('/edit_todo', methods=["GET", "POST"])
+@login_required
+def edit_todo():
+	return
+
+
+# delete todos
+@app.route('/edit_todo', methods=["GET", "POST"])
+@login_required
+def delete_todo():
+	return
 
 
 # feedback page

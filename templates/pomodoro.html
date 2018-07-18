@@ -53,7 +53,37 @@
 		</div>
 
 	</div>
-
 	<hr>
+
+	<div class="alert alert-dark" role="alert">
+		<h3><b>To-Do List</b></h3>
+		<a href="{{url_for('todos')}}" class="button">
+		<button id="table-button" type="submit" class="btn btn-dark btn-lg">
+			 Modify 
+		</button>
+		</a>
+	</div>
+
+	<table class="table table-striped todoTable">
+		<tr>
+			<th>ID</th>
+			<th>Category</th>
+			<th>Description</th>
+			<th>Completed</th>
+			<th>Date Created</th>
+			<th></th>
+		</tr>
+
+		{% for todo in todos %}
+			<tr>
+				<td>{{todo.id}}</td>
+				<td>{{todo.category}}</td>
+				<td>{{todo.description}}</td>
+				<td>{{todo.completed}}</td>
+				<td>{{todo.create_date}}</td>
+				<td></td>
+			</tr>
+		{% endfor %}
+	</table>
 
 {% endblock %}

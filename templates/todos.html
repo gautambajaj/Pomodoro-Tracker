@@ -1,25 +1,45 @@
-<table class="table table-striped todoTable">
-	<tr>
-		<td><h3><b>To-Do List</b></h3></td>
-	</tr>
+{% extends 'layout.html' %}
 
-	</tr>
-	{% for todo in todos %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/static/todos.css">
+{% endblock %}
+
+{% block body %}
+	<br><br><br><br>
+	<div class="alert alert-dark" role="alert">
+		<h3><b>To-Do List</b></h3>
+		<a href="/add_todo" class="button"> 
+		<button id="return-button" type="submit" class="btn btn-dark btn-lg">
+			Add New Task 
+		</button>
+		</a>
+	</div>
+
+	<table class="table table-striped todoTable">
 		<tr>
-			<td>{{todo.id}}</td>
-			<td>{{todo.category}}</td>
-			<td>{{article.description}}</td>
-			<td>{{todo.completed}}</td>
-			<td>{{todo.create_date}}</td>
-			<!-- <td><a href="edit_article/{{article.id}}" class="btn btn-success pull-right">Edit</a></td>
-			<td>
-				<form action="{{url_for('delete_article', id=article.id)}}" method="POST">
-					<input type="hidden" name="method" value="DELETE">
-					<input type="submit" value="Delete" class="btn btn-danger">  
-				</form>
-			</td> -->
-			<td></td>
+			<th>ID</th>
+			<th>Category</th>
+			<th>Description</th>
+			<th>Completed</th>
+			<th>Date Created</th>
+			<th></th>
 		</tr>
-	{% endfor %}
 
-</table>
+		{% for todo in todos %}
+			<tr>
+				<td>{{todo.id}}</td>
+				<td>{{todo.category}}</td>
+				<td>{{todo.description}}</td>
+				<td>{{todo.completed}}</td>
+				<td>{{todo.create_date}}</td>
+
+				<td></td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<br>
+	<hr>
+	<a href="/" class="btn btn-dark btn-lg" style="margin-left: 42%">Return to App</a>
+
+{% endblock %}
