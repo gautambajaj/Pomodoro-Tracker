@@ -12,7 +12,7 @@
 			<a href="/pomodoro" class="btn btn-primary btn-lg">Return to App</a>
 		{% else %}
 			<a href="/register" class="btn btn-primary btn-lg">Register</a>
-			<a href="/login" class="btn btn-success btn-lg">Login</a>
+			<a href="{{url_for('login')}}" class="btn btn-success btn-lg">Login</a>
 		{% endif %}
 	</div>
 

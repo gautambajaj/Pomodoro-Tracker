@@ -35,11 +35,11 @@
 						<div class="form-group">
 					    	<label for="pomodoroInterval" class="col-form-label">Pomodoro Interval:</label>
 							<input name="pomodoroInterval" type="time" step='60' id="pomodoroInterval" 
-								   min="00:25" max="00:50" value={{inputTimerTarget}}>
+								   min="00:01" max="00:50" value={{inputTimerTarget}}>
 						</div>
 						<div class="form-group">
 					    	<label for="breakInterval" class="col-form-label">Break Interval:</label>
-							<input name="breakInterval" type="time" step='60' id="breakInterval" min="00:05" 
+							<input name="breakInterval" type="time" step='60' id="breakInterval" min="00:01" 
 								   max="00:25" value={{inputBreakTarget}}>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 		</button>
 		</a>
 	</div>
-
+		
 	<table class="table table-striped todoTable">
 		<tr>
 			<th>Category</th>
@@ -73,6 +73,7 @@
 			<th></th>
 		</tr>
 
+	{% if todos %}
 		{% for todo in todos %}
 			<tr>
 				<td>{{todo.category}}</td>
@@ -81,7 +82,11 @@
 				<td>{{todo.create_date}}</td>
 				<td></td>
 			</tr>
+			</table>
 		{% endfor %}
-	</table>
+	{% else %}
+		</table>
+		<div class="alert alert-primary"> Your To-Do list is empty. </div>
+	{% endif %}
 
 {% endblock %}

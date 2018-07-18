@@ -69,7 +69,8 @@ def register():
 			new_member = Member(username=form.username.data, password=hashed_password, email=form.email.data)
 			db.session.add(new_member)
 			db.session.commit()
-			return redirect(url_for('pomodoro'))
+			session['registrationRedirect'] = True
+			return redirect(url_for('login'))
 	else:
 		return render_template('register.html',form=form)
 
@@ -87,6 +88,7 @@ def logout():
 @app.route('/pomodoro', methods=["GET", "POST"])
 @login_required
 def pomodoro():
+	session['registrationRedirect'] = False
 	if request.method == 'POST':
 		inputTimerTarget = request.form['pomodoroInterval']
 		inputBreakTarget = request.form['breakInterval']
@@ -116,8 +118,10 @@ def pomodoro():
 													inputTimerTarget=inputTimerTarget,
 													inputBreakTarget=inputBreakTarget)
 		else:
-			return render_template('pomodoro.html', todos=todos, timerTarget=25, breakTarget=5, 
-													inputTimerTarget=25, inputBreakTarget=5)
+			timerTarget = '00:25'
+			breakTarget = '00:05'
+			return render_template('pomodoro.html', todos=todos, timerTarget=timerTarget, breakTarget=breakTarget, 
+													inputTimerTarget=timerTarget, inputBreakTarget=breakTarget)
 
 
 # todos manager
