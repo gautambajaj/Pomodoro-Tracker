@@ -48,7 +48,7 @@ def login():
 				session['logged_in'] = True
 				return redirect(url_for('pomodoro'))
 		else:
-			pass #flash
+			flash('Incorrect username or password. Please try again.', 'danger')
 
 	return render_template('login.html',form=form)
 
@@ -59,11 +59,17 @@ def register():
 	form = RegisterForm()
 
 	if form.validate_on_submit():
-		hashed_password = generate_password_hash(form.password.data, method='sha256')
-		new_member = Member(username=form.username.data, password=hashed_password, email=form.email.data)
-		db.session.add(new_member)
-		db.session.commit()
-		return redirect(url_for('pomodoro'))
+		# check if username already exists
+		existingUser = Member.query.filter_by(username=form.username.data).first()
+		if existingUser:
+			flash('Username already exists. Please enter a different username.', 'danger')
+			return render_template('register.html',form=form)
+		else:
+			hashed_password = generate_password_hash(form.password.data, method='sha256')
+			new_member = Member(username=form.username.data, password=hashed_password, email=form.email.data)
+			db.session.add(new_member)
+			db.session.commit()
+			return redirect(url_for('pomodoro'))
 	else:
 		return render_template('register.html',form=form)
 
@@ -130,7 +136,7 @@ def add_todo():
 		category = request.form['category']
 		description = request.form['description']
 
-		if(category and description):
+		if category and (len(str(description).strip()) != 0):
 			newTodo = Todos(member_username=current_user.username, category=category, 
 							description=description, completed=False)
 			db.session.add(newTodo)
@@ -139,6 +145,7 @@ def add_todo():
 			return redirect(url_for('todos', todos=todos))
 		else:
 			flash('Please enter complete details', 'danger')
+			return render_template('add_todo.html')
 	else: 
 		return render_template('add_todo.html')
 
@@ -171,7 +178,7 @@ def delete_todo(id):
 	db.session.delete(delTodo)
 	db.session.commit()
 	todos = getTodos()
-	return render_template('todos.html', todos=todos)
+	return redirect(url_for('todos', todos=todos))
 
 
 # feedback page

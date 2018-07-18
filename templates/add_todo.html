@@ -14,6 +14,13 @@
 			<textarea class="form-control" name="description" rows="3" id="description"> </textarea>
 		</div>
 		<br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 		<button type="submit" class="btn btn-primary btn-lg">Save</button>
 		<a href="{{url_for('todos')}}" type="button" class="btn btn-secondary btn-lg">Cancel</a>
 	</form>	
