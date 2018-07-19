@@ -174,8 +174,8 @@ def edit_todo(id):
 		todos = getTodos()
 		return redirect(url_for('todos',todos=todos))
 	else:
-		return render_template('edit_todo.html',editTodo=editTodo)
-
+		if editTodo and editTodo.member_username == current_user.username:
+			return render_template('edit_todo.html',editTodo=editTodo)
 
 # delete todos
 @app.route('/delete_todo/<string:id>', methods=["POST"])
@@ -201,7 +201,7 @@ def feedback():
 		db.session.add(newFeedback)
 		db.session.commit()
 
-		flash('Submission successful. Thank you for your feedback.', 'success')
+		flash('Submission successful! Thank you for your feedback.', 'success')
 		return render_template('feedback.html')
 	else: 		
 		return render_template('feedback.html')
