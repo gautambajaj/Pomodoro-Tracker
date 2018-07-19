@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block body %}
+	<br><br><br><br>
+
+	<form method="post">
+		<div class="form-group">
+			<label for="feedback" class="col-form-label"><h3>Submit Feedback:</h3></label>
+			<hr>
+			<textarea class="form-control" name="feedback" rows="6" id="feedback"> </textarea>
+			<br>
+		</div>
+			<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+	</form>
+	<br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}"> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}

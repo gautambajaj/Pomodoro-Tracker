@@ -1,5 +1,5 @@
 from app import app, db
-from models import Member, Todos, TimerDetails
+from models import Member, Todos, TimerDetails, Feedbacks
 from forms import LoginForm, RegisterForm
 from flask import render_template, flash, redirect, url_for, session, logging, request
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -32,6 +32,9 @@ def getTodos():
 			todo.completed = 'Pending'
 		todo.create_date = str(todo.create_date)
 		todo.create_date = todo.create_date[0:10] 
+
+	todos.sort(key=lambda x: x.completed, reverse=True)
+
 	return todos
 
 
@@ -186,6 +189,19 @@ def delete_todo(id):
 
 
 # feedback page
-@app.route('/feedback')
+@app.route('/feedback', methods=["GET", "POST"])
 def feedback():	
-	pass
+	if request.method == 'POST':
+		member_username = "guest"
+		feedback = request.form['feedback']
+		if session['logged_in']:
+			member_username = current_user.username
+
+		newFeedback = Feedbacks(member_username=member_username, feedback=feedback)
+		db.session.add(newFeedback)
+		db.session.commit()
+
+		flash('Submission successful. Thank you for your feedback.', 'success')
+		return render_template('feedback.html')
+	else: 		
+		return render_template('feedback.html')

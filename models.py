@@ -23,3 +23,8 @@ class TimerDetails(db.Model):
 	member_username = db.Column(db.String(50))
 	pomodoro_interval = db.Column(db.Integer())
 	break_interval = db.Column(db.Integer())
+
+class Feedbacks(db.Model):
+	id = db.Column(db.Integer(), primary_key=True, unique=True, autoincrement=True)
+	member_username = db.Column(db.String(50))
+	feedback = db.Column(db.String(100))

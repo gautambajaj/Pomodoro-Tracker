@@ -82,11 +82,12 @@
 				<td>{{todo.create_date}}</td>
 				<td></td>
 			</tr>
-			</table>
 		{% endfor %}
+	{% endif %}
+	</table>
+
+	{% if todos %}
 	{% else %}
-		</table>
 		<div class="alert alert-primary"> Your To-Do list is empty. </div>
 	{% endif %}
-
 {% endblock %}

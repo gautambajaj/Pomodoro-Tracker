@@ -12,3 +12,11 @@ h3{
   font:  18px;
   color: white;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+.strikeout {
+	background-color: green;
+}
