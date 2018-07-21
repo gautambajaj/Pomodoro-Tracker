@@ -121,8 +121,8 @@ def pomodoro():
 													inputTimerTarget=inputTimerTarget,
 													inputBreakTarget=inputBreakTarget)
 		else:
-			timerTarget = '00:25'
-			breakTarget = '00:05'
+			timerTarget = '25'
+			breakTarget = '5'
 			return render_template('pomodoro.html', todos=todos, timerTarget=timerTarget, breakTarget=breakTarget, 
 													inputTimerTarget=timerTarget, inputBreakTarget=breakTarget)
 
