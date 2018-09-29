@@ -5,4 +5,4 @@ database
 * Allows users to schedule to-do tasks and set custom pomodoro-timer intervals for organizing work
 * Technologies used: Flask, SQLAlchemy, jQuery, Bootstrap, AWS
 
-Try out here: http://ec2-18-130-189-187.eu-west-2.compute.amazonaws.com:8000/
+Try out here: http://ec2-18-223-136-107.us-east-2.compute.amazonaws.com:5000/
